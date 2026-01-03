@@ -1,9 +1,14 @@
 export class Maker {
   #color = "oklch(0.6 0.12 180)";
-  #opacity = 0.1;
+  #opacity = 0.7;
 
   bittyReady() {
     this.api.trigger("update");
+  }
+
+  backgroundImage() {
+    const subs = [["URL", this.url()]];
+    return this.api.makeTXT(this.template("background-image"), subs);
   }
 
   base64() {
@@ -15,7 +20,7 @@ export class Maker {
     this.api.trigger("update");
   }
 
-  color(_, el) {
+  initColor(_, el) {
     el.value = this.#color;
   }
 
@@ -31,25 +36,24 @@ export class Maker {
 
   update(_, el) {
     this.api.setProp(`--texture-color`, this.#color);
-    el.innerHTML = this.url();
+    this.api.setProp(`--texture-image`, this.url());
+    el.innerHTML = this.backgroundImage();
   }
 
   svg() {
-    const subs = [
-      ["OPACITY", this.#opacity],
-    ];
+    const subs = [["OPACITY", this.#opacity]];
     return this.api.makeTXT(this.template("svg"), subs);
   }
 
   template(name) {
     switch (name) {
-      case "image":
+      case "background-image":
         return `background-image: URL;`;
       case "svg":
         return `
 <svg viewBox="0 0 2000 2000" xmlns="http://www.w3.org/2000/svg">
   <filter id="noiseFilter">
-    <feTurbulence type="fractalNoise" baseFrequency="3" numOctaves="1" stitchTiles="stitch" result="noise" />
+    <feTurbulence type="fractalNoise" baseFrequency="4" numOctaves="2" stitchTiles="stitch" result="noise" />
     <feColorMatrix type="saturate" values="0" result="grayscale" />
     <feMerge>
       <feMergeNode in="noise" />
@@ -59,14 +63,12 @@ export class Maker {
   <rect width="100%" height="100%" opacity="OPACITY" filter="url(#noiseFilter)"/>
 </svg>`;
       case "url":
-        return `url("data:image/svg+xml;base64,SVG)`;
+        return `url(data:image/svg+xml;base64,SVG)`;
     }
   }
 
   url() {
-    const subs = [
-      ["SVG", this.base64()],
-    ];
+    const subs = [["SVG", this.base64()]];
     return this.api.makeTXT(this.template("url"), subs);
   }
 }

@@ -130,7 +130,6 @@ code {
 
 .code-block.no-nums {
   padding-left: var(--default-padding);
-
   & .line-marker:before {
     opacity: 0;
   }
