@@ -131,7 +131,7 @@ export class ThemeSwitcher {
         return `<span>|</span>`;
 
       case "switcher":
-        return `<div class="theme-switcher"><span>|</span> Colors: </div>`;
+        return `<div class="theme-switcher">Colors: </div>`;
     }
   }
 }

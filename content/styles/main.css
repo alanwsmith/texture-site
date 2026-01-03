@@ -96,9 +96,7 @@ code {
   border-radius: var(--default-border-radius);
   font-size: var(--small-font-size);
   margin-block: var(--default-margin);
-  padding-block: var(--xlarge-padding);
-  padding-left: 3.2rem;
-  padding-right: var(--default-padding);
+  padding: var(--default-padding);
   white-space: pre-wrap; 
   overflow-wrap: anywhere;
   overflow-x: auto;
@@ -161,7 +159,7 @@ footer {
 h1 {
   color: var(--heading-color);
   border-bottom: var(--accent-border);
-  font-size: var(--xxlarge-font-size);
+  font-size: var(--xxxlarge-font-size);
   font-weight: var(--font-weight-900);
   line-height: var(--xxsmall-line-height);
   overflow-wrap: break-word;
@@ -345,7 +343,8 @@ textarea {
 .texture-example {
   background-color: oklch(var(--bg-lightness) var(--bg-chroma) var(--bg-hue));
   background-image: var(--texture-image);
-  border: var(--reverse-border);
+  background-size: 120px 120px;
+  border: var(--faded-reverse-border);
   border-radius: var(--default-border-radius);
   height: 16rem;
   margin-top: var(--large-margin);

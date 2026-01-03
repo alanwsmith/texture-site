@@ -1,15 +1,20 @@
 export class Maker {
-  #lightness = 0.6;
-  #chroma = 0.16;
+  #lightness = 0.35;
+  #chroma = 0.1;
   #hue = 260;
-  #opacity = 0.7;
+  #opacity = 0.20;
 
   bittyReady() {
     this.api.trigger("update");
   }
 
-  backgroundImage() {
-    const subs = [["URL", this.url()]];
+  stylesheet() {
+    const subs = [
+      ["LIGHTNESS", this.#lightness],
+      ["CHROMA", this.#chroma],
+      ["HUE", this.#hue],
+      ["URL", this.url()],
+    ];
     return this.api.makeTXT(this.template("stylesheet"), subs);
   }
 
@@ -39,16 +44,19 @@ export class Maker {
   chroma(ev, _) {
     this.#chroma = ev.valueToFloat;
     this.api.setProp("--bg-chroma", this.#chroma);
+    this.api.trigger("update");
   }
 
   hue(ev, _) {
     this.#hue = ev.valueToFloat;
     this.api.setProp("--bg-hue", this.#hue);
+    this.api.trigger("update");
   }
 
   lightness(ev, _) {
     this.#lightness = ev.valueToFloat;
     this.api.setProp("--bg-lightness", this.#lightness);
+    this.api.trigger("update");
   }
 
   opacity(ev, _) {
@@ -58,7 +66,7 @@ export class Maker {
 
   update(_, el) {
     this.api.setProp(`--texture-image`, this.url());
-    el.innerHTML = this.backgroundImage();
+    el.innerHTML = this.stylesheet();
   }
 
   svg() {
@@ -71,18 +79,34 @@ export class Maker {
   template(name) {
     switch (name) {
       case "stylesheet":
-        return `
-:root {
-  --bg-ligthness: LIGHTNESS;
+        return `:root {
+  --bg-lightness: LIGHTNESS;
   --bg-chroma: CHROMA;
   --bg-hue: HUE;
 }
 
 body {
   background-color: oklch(var(--bg-lightness) var(--bg-chroma) var(--bg-hue));
+  background-size: 150px 150px;
   background-image: URL;
 }`;
       case "svg":
+        return `
+<svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+  <filter id="noiseFilter">
+    <feTurbulence type="fractalNoise" baseFrequency="3" numOctaves="2" result="noise" />
+    <feColorMatrix type="saturate" values="0" result="grayscale" />
+  <feComponentTransfer>
+    <feFuncA in="grayscale" type="linear" slope="0.4" result="out2" />
+  </feComponentTransfer>
+    <feMerge>
+      <feMergeNode in="noise" />
+      <feMergeNode in="out2" />
+    </feMerge>
+  </filter>
+  <rect width="100%" height="100%" opacity="OPACITY" filter="url(#noiseFilter)"/>
+</svg>`;
+      case "svgx":
         return `
 <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
   <filter id="noiseFilter">
