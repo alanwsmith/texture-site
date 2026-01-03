@@ -1,9 +1,9 @@
 export class Maker {
   #color = "oklch(0.6 0.12 180)";
-  #opacity;
+  #opacity = 0.1;
 
   bittyReady() {
-    console.log("asdf");
+    this.api.trigger("update");
   }
 
   base64() {
@@ -12,21 +12,24 @@ export class Maker {
 
   color(ev, _) {
     this.#color = ev.value;
-    this.api.trigger("outputCSS");
+    this.api.trigger("update");
   }
 
-  initColor(_, el) {
+  color(_, el) {
     el.value = this.#color;
-    this.api.trigger("outputCSS");
+  }
+
+  initOpacity(_, el) {
+    el.value = this.#opacity;
   }
 
   opacity(ev, el) {
     this.#opacity = ev.valueToFloat;
     el.innerHTML = this.#opacity;
-    this.api.trigger("outputCSS");
+    this.api.trigger("update");
   }
 
-  outputCSS(_, el) {
+  update(_, el) {
     this.api.setProp(`--texture-color`, this.#color);
     el.innerHTML = this.url();
   }

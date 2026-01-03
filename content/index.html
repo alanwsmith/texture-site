@@ -12,18 +12,18 @@
 <bitty-7-0 data-connect="/bits/maker.js Maker">
   <div>
     <label>CSS Background Color: 
-      <input type="text" data-send="color" data-init="initColor" />
+      <input type="text" data-init="initColor" data-send="color" />
     </label>
   </div>
   <div>
     <label>Opacity: 
-      <input type="range" data-send="opacity" min="0" max="1" step="0.01" />
+      <input type="range" data-init="initOpacity" data-send="opacity" min="0" max="1" step="0.01" />
       <span data-receive="opacity">-</span>
     </label>
   </div>
   <div class="texture-example"></div>
   <div class="output xlarge-top-margin">
-    <pre class="code-block no-numbers"><code data-receive="outputCSS"></code></pre>
+    <pre class="code-block no-numbers"><code data-receive="update"></code></pre>
   </div>
 
 </bitty-7-0>
