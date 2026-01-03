@@ -1,5 +1,5 @@
 export class Maker {
-  #color;
+  #color = "oklch(0.6 0.12 180)";
   #opacity;
 
   bittyReady() {
@@ -12,6 +12,11 @@ export class Maker {
 
   color(ev, _) {
     this.#color = ev.value;
+    this.api.trigger("outputCSS");
+  }
+
+  initColor(_, el) {
+    el.value = this.#color;
     this.api.trigger("outputCSS");
   }
 

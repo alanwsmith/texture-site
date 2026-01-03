@@ -128,7 +128,7 @@ code {
   overscroll-behavior-x: none;
 }
 
-.code-block.nonums {
+.code-block.no-nums {
   padding-left: var(--default-padding);
 
   & .line-marker:before {
