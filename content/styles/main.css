@@ -337,7 +337,9 @@ svg {
 
 textarea {
   font: inherit;
-  max-width: 100%;
+  font-size: var(--xsmall-font-size);
+  width: 100%;
+  height: 10rem;
 }
 
 .texture-example {

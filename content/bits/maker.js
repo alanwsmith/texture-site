@@ -3,6 +3,11 @@ export class Maker {
   #chroma = 0.1;
   #hue = 260;
   #opacity = 0.20;
+  #svg = null;
+
+  bittyInit() {
+    this.#svg = this.template("svg");
+  }
 
   bittyReady() {
     this.api.trigger("update");
@@ -41,6 +46,10 @@ export class Maker {
     el.value = this.#opacity;
   }
 
+  initSVG(_, el) {
+    el.value = this.api.makeTXT(this.template("svg"));
+  }
+
   chroma(ev, _) {
     this.#chroma = ev.valueToFloat;
     this.api.setProp("--bg-chroma", this.#chroma);
@@ -69,11 +78,16 @@ export class Maker {
     el.innerHTML = this.stylesheet();
   }
 
+  updateSVG(ev, _) {
+    this.#svg = ev.value;
+    this.api.trigger("update");
+  }
+
   svg() {
     const subs = [
       ["OPACITY", this.#opacity],
     ];
-    return this.api.makeTXT(this.template("svg"), subs);
+    return this.api.makeTXT(this.#svg, subs);
   }
 
   template(name) {
@@ -91,30 +105,16 @@ body {
   background-image: URL;
 }`;
       case "svg":
-        return `
-<svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+        return `<svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
   <filter id="noiseFilter">
     <feTurbulence type="fractalNoise" baseFrequency="3" numOctaves="2" result="noise" />
     <feColorMatrix type="saturate" values="0" result="grayscale" />
-  <feComponentTransfer>
-    <feFuncA in="grayscale" type="linear" slope="0.4" result="out2" />
-  </feComponentTransfer>
+    <feComponentTransfer>
+      <feFuncA in="grayscale" type="linear" slope="0.4" result="updated" />
+    </feComponentTransfer>
     <feMerge>
       <feMergeNode in="noise" />
-      <feMergeNode in="out2" />
-    </feMerge>
-  </filter>
-  <rect width="100%" height="100%" opacity="OPACITY" filter="url(#noiseFilter)"/>
-</svg>`;
-      case "svgx":
-        return `
-<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-  <filter id="noiseFilter">
-    <feTurbulence type="fractalNoise" baseFrequency="3" numOctaves="2" stitchTiles="stitch" result="noise" />
-    <feColorMatrix type="saturate" values="0" result="grayscale" />
-    <feMerge>
-      <feMergeNode in="noise" />
-      <feMergeNode in="grayscale" />
+      <feMergeNode in="updated" />
     </feMerge>
   </filter>
   <rect width="100%" height="100%" opacity="OPACITY" filter="url(#noiseFilter)"/>

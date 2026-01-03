@@ -197,11 +197,13 @@ body {
 <hgroup>
   <h1>Background Texture Maker</h1>
   <div class="page-subtitle faded-accent-color">
-    SVGs with some grit
+    give your site a little grit
   </div>
 </hgroup>
 
 <bitty-7-0 data-connect="/bits/maker.js Maker" class="default-flow">
+  <p>Move the sliders below to set your background. Copy/paste the CSS when you've got it the way you want.</p>
+
   <div class="texture-example"></div>
 
   <div class="controls">
@@ -226,10 +228,35 @@ body {
     </div>
   </div>
 
+  <details open><summary>Texture SVG Source</summary>
+    <textarea data-init="initSVG" data-send="updateSVG"></textarea>
+  </details>
+
   <div class="output xlarge-top-margin">
     <pre class="code-block no-numbers"><code data-receive="update"></code></pre>
   </div>
-</bitty-7-0>      </main>
+</bitty-7-0>
+
+<h2>Details</h2>
+<ul>
+<li>This tool generates CSS for a textured site background.</li>
+<li>The texture is created via an SVG that's encoded as a base64 url inside the CSS.</li>
+<li>The Lightness, Chroma, and Hue sliders set the base background variables for an oklch
+color.</li>
+<li>The Opacity slider controls the opacity of the texture SVG relative to the base color.</li>
+<li>The texture in the SVG is generated via SVG filters.</li>
+<li>The initial SVG filter values are hard coded. You can open the <code>Texture SVG Source</code>
+below the sliders to adjust it manually.</li>
+<li>The <code>Copy</code> button below the CSS copies the code to your
+clipboard for pasting into your stylesheets.</li>
+<li>Note that the <code>background-size</code> in the CSS is required to keep the browser from
+resizing the SVG tiles in a way that changes based on the content of the page. If
+you change the source SVG you'll want to manually adjust those values after
+you copy/paste the code.</li>
+<li>The page doesn't store your settings. You can refresh the page to reset
+the SVG if you mess with it and it breaks.</li>
+</ul>
+      </main>
 
 <footer class="default-wrapper xxlarge-block-padding accent-top-border xxxlarge-top-margin">
   <div class="small-font-size">
