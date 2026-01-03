@@ -135,9 +135,13 @@ code {
   }
 }
 
-
 .contrast-button.active:hover {
   color: var(--reverse-color);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 del {
@@ -243,12 +247,10 @@ iframe {
 }
 
 .image-block {
-
   details :where(:not(:first-child)) {
     margin-top: var(--flow-space, 1em);
     padding-inline: 0.4rem;
   }
-
   details {
     margin-block: var(--default-margin);
     & summary {
@@ -256,36 +258,30 @@ iframe {
       padding-inline: 0.6rem;
     }
   }
-
   details[open]{
     border-radius: 0.4rem;
     outline: var(--faded-accent-border);
     padding-bottom: 0.4rem;
-
     & summary {
       display: block;
       border-bottom: var(--faded-accent-border);
     }
-
     & summary:before {
       content: "▼ ";
       font-family: monospace;
     }
   }
-
   details:not([open]) {
     & summary {
       border-radius: 0.4rem;
       display: inline-block;
       outline: var(--faded-accent-border);
     }
-
     & summary:before {
       content: "▶ ";
       font-family: monospace;
     }
   }
-
 }
 
 img {
@@ -346,7 +342,7 @@ textarea {
 }
 
 .texture-example {
-  background-color: var(--texture-color);
+  background-color: oklch(var(--bg-lightness) var(--bg-chroma) var(--bg-hue));
   background-image: var(--texture-image);
   border: var(--reverse-border);
   border-radius: var(--default-border-radius);

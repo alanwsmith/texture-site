@@ -1,5 +1,7 @@
 export class Maker {
-  #color = "oklch(0.6 0.12 180)";
+  #lightness = 0.6;
+  #chroma = 0.16;
+  #hue = 260;
   #opacity = 0.7;
 
   bittyReady() {
@@ -8,52 +10,84 @@ export class Maker {
 
   backgroundImage() {
     const subs = [["URL", this.url()]];
-    return this.api.makeTXT(this.template("background-image"), subs);
+    return this.api.makeTXT(this.template("stylesheet"), subs);
   }
 
   base64() {
     return btoa(this.svg());
   }
 
-  color(ev, _) {
-    this.#color = ev.value;
-    this.api.trigger("update");
+  initChroma(_, el) {
+    el.value = this.#chroma;
+    this.api.setProp("--bg-chroma", this.#chroma);
   }
 
-  initColor(_, el) {
-    el.value = this.#color;
+  initHue(_, el) {
+    el.value = this.#hue;
+    this.api.setProp("--bg-hue", this.#hue);
+  }
+
+  initLightness(_, el) {
+    el.value = this.#lightness;
+    this.api.setProp("--bg-lightness", this.#lightness);
   }
 
   initOpacity(_, el) {
     el.value = this.#opacity;
   }
 
-  opacity(ev, el) {
+  chroma(ev, _) {
+    this.#chroma = ev.valueToFloat;
+    this.api.setProp("--bg-chroma", this.#chroma);
+  }
+
+  hue(ev, _) {
+    this.#hue = ev.valueToFloat;
+    this.api.setProp("--bg-hue", this.#hue);
+  }
+
+  lightness(ev, _) {
+    this.#lightness = ev.valueToFloat;
+    this.api.setProp("--bg-lightness", this.#lightness);
+  }
+
+  opacity(ev, _) {
     this.#opacity = ev.valueToFloat;
-    el.innerHTML = this.#opacity;
     this.api.trigger("update");
   }
 
   update(_, el) {
-    this.api.setProp(`--texture-color`, this.#color);
+    //this.api.setProp(`--texture-color`, this.#color);
     this.api.setProp(`--texture-image`, this.url());
     el.innerHTML = this.backgroundImage();
   }
 
   svg() {
-    const subs = [["OPACITY", this.#opacity]];
+    const subs = [
+      ["OPACITY", this.#opacity],
+    ];
     return this.api.makeTXT(this.template("svg"), subs);
   }
 
   template(name) {
     switch (name) {
-      case "background-image":
-        return `background-image: URL;`;
+      case "stylesheet":
+        return `
+:root {
+  --bg-ligthness: LIGHTNESS;
+  --bg-chroma: CHROMA;
+  --bg-hue: HUE;
+}
+
+body {
+  background-color: oklch(var(--bg-lightness) var(--bg-chroma) var(--bg-hue));
+  background-image: URL;
+}`;
       case "svg":
         return `
-<svg viewBox="0 0 2000 2000" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
   <filter id="noiseFilter">
-    <feTurbulence type="fractalNoise" baseFrequency="4" numOctaves="2" stitchTiles="stitch" result="noise" />
+    <feTurbulence type="fractalNoise" baseFrequency="3" numOctaves="2" stitchTiles="stitch" result="noise" />
     <feColorMatrix type="saturate" values="0" result="grayscale" />
     <feMerge>
       <feMergeNode in="noise" />

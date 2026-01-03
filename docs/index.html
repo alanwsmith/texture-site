@@ -200,23 +200,33 @@ body {
   </div>
 </hgroup>
 
-<bitty-7-0 data-connect="/bits/maker.js Maker">
-  <div>
-    <label>CSS Background Color: 
-      <input type="text" data-init="initColor" data-send="color" />
-    </label>
-  </div>
-  <div>
-    <label>Opacity: 
-      <input type="range" data-init="initOpacity" data-send="opacity" min="0" max="1" step="0.01" />
-      <span data-receive="opacity">-</span>
-    </label>
-  </div>
+<bitty-7-0 data-connect="/bits/maker.js Maker" class="default-flow">
   <div class="texture-example"></div>
+
+  <div class="controls">
+    <div>
+      <label>
+        <div>Lightness</div>
+        <input type="range" data-init="initLightness" data-send="lightness" min="0" max="1" step="0.001" />
+      </label>
+      <label><div>Chroma</div>
+        <input type="range" data-init="initChroma" data-send="chroma" min="0" max="0.3" step="0.0001" />
+      </label>
+      <label><div>Hue</div>
+        <input type="range" data-init="initHue" data-send="hue" min="0" max="360" step="0.001" />
+      </label>
+    </div>
+    <div>
+      <label>
+        <div>Opacity</div>
+        <input type="range" data-init="initOpacity" data-send="opacity" min="0" max="1" step="0.01" />
+      </label>
+    </div>
+  </div>
+
   <div class="output xlarge-top-margin">
     <pre class="code-block no-numbers"><code data-receive="update"></code></pre>
   </div>
-
 </bitty-7-0>      </main>
 
 <footer class="default-wrapper xxlarge-block-padding accent-top-border xxxlarge-top-margin">
