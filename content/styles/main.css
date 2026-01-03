@@ -291,6 +291,7 @@ img {
 
 input {
   font: inherit;
+  width: 80%;
 }
 
 kbd {

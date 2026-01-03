@@ -57,7 +57,6 @@ export class Maker {
   }
 
   update(_, el) {
-    //this.api.setProp(`--texture-color`, this.#color);
     this.api.setProp(`--texture-image`, this.url());
     el.innerHTML = this.backgroundImage();
   }
