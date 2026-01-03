@@ -155,18 +155,18 @@ body {
 <link rel="shortcut icon" href="/favicon.ico" />
 <title></title>
 <meta property="og:title" content="" />
-<meta name="description" content="" />
-<meta property="og:description" content="" />
+<meta name="description" content="A little tool to make textured SVGs for site backgrounds." />
+<meta property="og:description" content="A little tool to make textured SVGs for site backgrounds." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.alanwsmith.com/" />
-<meta property="og:image" content="https://www.alanwsmith.com&#x2f;images&#x2f;og-image.jpg" />
+<meta property="og:url" content="https://texture.alanwsmith.com/" />
+<meta property="og:image" content="https://texture.alanwsmith.com&#x2f;images&#x2f;og-image.jpg" />
 <link rel="apple-touch-icon" sizes="180x180" href="&#x2f;favicons/apple-touch-icon.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="&#x2f;favicons/favicon-16x16.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="&#x2f;favicons/favicon-32x32.png" />
 <link rel="manifest" href="&#x2f;favicons/site.webmanifest" />
 <link rel="mask-icon" href="&#x2f;favicons/safari-pinned-tab.svg" color="#5bbad5" />
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://www.alanwsmith.com&#x2f;images&#x2f;og-image.jpg">
+<meta name="twitter:image" content="https://texture.alanwsmith.com&#x2f;images&#x2f;og-image.jpg">
   </head>
   <body>
     <bitty-7-0
@@ -194,22 +194,38 @@ body {
 </header>
       <main class="default-wrapper default-flow">
 <hgroup>
-    <h1>A New Site</h1>
-    <div class="page-subtitle">
-      With a subtitle
-    </div>
-  </hgroup>
+  <h1>Background Texture Maker</h1>
+  <div class="page-subtitle">
+    SVGs with some grit
+  </div>
+</hgroup>
 
-  <p>Hello, world</p>
+<bitty-7-0 data-connect="/bits/maker.js Maker">
+  <div>
+    <label>CSS Background Color: 
+      <input type="text" data-send="color" />
+    </label>
+  </div>
+  <div>
+    <label>Opacity: 
+      <input type="range" data-send="opacity" min="0" max="1" step="0.01" />
+      <span data-receive="opacity">-</span>
+    </label>
+  </div>
+  <div class="texture-example"></div>
+  <div class="output xlarge-top-margin">
+    <pre class="code-block"><code data-receive="outputCSS"></code></pre>
+  </div>
 
-  <p>the quick brown fox</p>      </main>
+
+</bitty-7-0>      </main>
 
 <footer class="default-wrapper xxlarge-block-padding accent-top-border xxxlarge-top-margin">
   <div class="small-font-size">
     <div class="text-align-center">
     from <a href="https://www.alanwsmith.com/">alan w smith</a>
     </div>
-    <div class="text-align-center"><a href="https:&#x2f;&#x2f;github.com&#x2f;alanwsmith&#x2f;">source</a> ~ <a href="https://socials.alanwsmith.com/">socials</a> ~
+    <div class="text-align-center"><a href="https:&#x2f;&#x2f;github.com&#x2f;alanwsmith&#x2f;texture-site">source</a> ~ <a href="https://socials.alanwsmith.com/">socials</a> ~
     <a href="https://links.alanwsmith.com/">other projects</a> ~
     <a href="https://www.alanwsmith.com/feeds/posts.xml">rss</a>
     </div>

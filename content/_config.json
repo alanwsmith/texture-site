@@ -1,9 +1,9 @@
 {
   "site": {
-    "description": "",
-    "domain_without_trailing_slash": "www.alanwsmith.com",
+    "description": "A little tool to make textured SVGs for site backgrounds.",
+    "domain_without_trailing_slash": "texture.alanwsmith.com",
     "favicon_root": "/favicons",
-    "github_url": "https://github.com/alanwsmith/",
+    "github_url": "https://github.com/alanwsmith/texture-site",
     "og_image_rel_path": "/images/og-image.jpg",
     "title": ""
   }

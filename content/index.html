@@ -1,15 +1,32 @@
 [!- extends "_wrappers/main.html" -!]
 
 [!- block main -!]
-  <hgroup>
-    <h1>A New Site</h1>
-    <div class="page-subtitle">
-      With a subtitle
-    </div>
-  </hgroup>
 
-  <p>Hello, world</p>
+<hgroup>
+  <h1>Background Texture Maker</h1>
+  <div class="page-subtitle">
+    SVGs with some grit
+  </div>
+</hgroup>
 
-  <p>[@ example_global_var_from_vars_file  @]</p>
+<bitty-7-0 data-connect="/bits/maker.js Maker">
+  <div>
+    <label>CSS Background Color: 
+      <input type="text" data-send="color" />
+    </label>
+  </div>
+  <div>
+    <label>Opacity: 
+      <input type="range" data-send="opacity" min="0" max="1" step="0.01" />
+      <span data-receive="opacity">-</span>
+    </label>
+  </div>
+  <div class="texture-example"></div>
+  <div class="output xlarge-top-margin">
+    <pre class="code-block"><code data-receive="outputCSS"></code></pre>
+  </div>
+
+
+</bitty-7-0>
 
 [!- endblock -!]

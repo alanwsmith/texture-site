@@ -346,6 +346,16 @@ textarea {
   max-width: 100%;
 }
 
+.texture-example {
+  background-color: var(--texture-color);
+  background-image: var(--texture-image);
+  border: var(--reverse-border);
+  border-radius: var(--default-border-radius);
+  height: 16rem;
+  margin-top: var(--large-margin);
+  width: 100%;
+}
+
 th {
   font-weight: var(--weight-900);
 }
@@ -366,7 +376,6 @@ th {
   flex-wrap: wrap;
   gap: var(--default-padding);
   padding: var(--small-padding);
-
   & button.active {
       background-color: var(--faded-reverse-color);
       color: var(--match-color);
