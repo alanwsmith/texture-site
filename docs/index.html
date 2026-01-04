@@ -240,7 +240,6 @@ body {
 <h2>Details</h2>
 <ul>
 <li>This tool generates CSS for a textured site background.</li>
-<li>The texture is created via an SVG that's encoded as a base64 url inside the CSS.</li>
 <li>The Lightness, Chroma, and Hue sliders set the base background variables for an oklch
 color.</li>
 <li>The Opacity slider controls the opacity of the texture SVG relative to the base color.</li>
@@ -255,6 +254,11 @@ you change the source SVG you'll want to manually adjust those values after
 you copy/paste the code.</li>
 <li>The page doesn't store your settings. You can refresh the page to reset
 the SVG if you mess with it and it breaks.</li>
+<li>The original version of this used base64 encoding.
+<a href="https://tylersticka.com/">Tyler Sticka</a> reminded me that that's not necessary for SVG.
+I yoinked some code from <a href="https://github.com/tigt/mini-svg-data-uri/blob/master/index.js">this repo</a><br />
+by <a href="https://ti.gt/">Taylor Hunt</a> to do the necessary escaping.
+(See <a href="https://codepen.io/tigt/post/optimizing-svgs-in-data-uris">Optimizing SVGs in data URIs</a> for details.)</li>
 </ul>
       </main>
 

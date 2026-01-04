@@ -27,6 +27,19 @@ export class Maker {
     return btoa(this.svg());
   }
 
+  escape() {
+    return encodeURIComponent(
+      this
+        .svg()
+        .replaceAll(`"`, "'")
+        .replaceAll(/\s+/g, " "),
+    )
+      .replaceAll(`%20`, " ")
+      .replaceAll(`%3D`, "=")
+      .replaceAll(`%3A`, ":")
+      .replaceAll(`%2F`, "/");
+  }
+
   initChroma(_, el) {
     el.value = this.#chroma;
     this.api.setProp("--bg-chroma", this.#chroma);
@@ -120,12 +133,12 @@ body {
   <rect width="100%" height="100%" opacity="OPACITY" filter="url(#noiseFilter)"/>
 </svg>`;
       case "url":
-        return `url("data:image/svg+xml;base64,SVG")`;
+        return `url("data:image/svg+xml,SVG")`;
     }
   }
 
   url() {
-    const subs = [["SVG", this.base64()]];
+    const subs = [["SVG", this.escape()]];
     return this.api.makeTXT(this.template("url"), subs);
   }
 }
