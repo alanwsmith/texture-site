@@ -120,7 +120,7 @@ body {
   <rect width="100%" height="100%" opacity="OPACITY" filter="url(#noiseFilter)"/>
 </svg>`;
       case "url":
-        return `url(data:image/svg+xml;base64,SVG)`;
+        return `url("data:image/svg+xml;base64,SVG")`;
     }
   }
 
